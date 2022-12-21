@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14.3-alpine3.15
+    ports:
+      - "5430:5432"
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: aiohttp_homework
+  app:
+    build: .
+    environment:
+      DSN: "postgresql+asyncpg://app:1234@db:5432/aiohttp_homework"
+      DSN_SYNC: "postgresql://app:1234@db:5432/aiohttp_homework"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+
+
+
+
+
+
+
+
+
+
